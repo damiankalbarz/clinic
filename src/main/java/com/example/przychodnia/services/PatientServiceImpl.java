@@ -2,6 +2,7 @@ package com.example.przychodnia.services;
 
 import com.example.przychodnia.models.Patient;
 
+import com.example.przychodnia.models.Prescription;
 import com.example.przychodnia.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,5 +47,14 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public void deletePatient(Long id) {
         patientRepository.deleteById(id);
+    }
+
+    @Override
+    public Patient addPrescriptionToPatient(Long patientId, Prescription prescription) {
+        Patient patient = getPatientById(patientId);
+        List<Prescription> prescriptionList = patient.getPrescriptionList();
+        prescriptionList.add(prescription);
+        patient.setPrescriptionList(prescriptionList);
+        return patientRepository.save(patient);
     }
 }

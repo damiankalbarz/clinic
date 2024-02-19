@@ -1,6 +1,7 @@
 package com.example.przychodnia.controllers;
 
 import com.example.przychodnia.models.Patient;
+import com.example.przychodnia.models.Prescription;
 import com.example.przychodnia.services.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,5 +49,11 @@ public class PatientController {
     public ResponseEntity<Void> deletePatient(@PathVariable Long id) {
         patientService.deletePatient(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping("/{patientId}/prescriptions")
+    public ResponseEntity<Patient> addPrescriptionToPatient(@PathVariable Long patientId, @RequestBody Prescription prescription) {
+        Patient patient = patientService.addPrescriptionToPatient(patientId, prescription);
+        return new ResponseEntity<>(patient, HttpStatus.OK);
     }
 }

@@ -1,6 +1,7 @@
 package com.example.przychodnia.services;
 
 import com.example.przychodnia.models.Patient;
+import com.example.przychodnia.models.Prescription;
 
 import java.util.List;
 
@@ -13,6 +14,8 @@ public interface PatientService {
     Patient addPatient(Patient patient);
 
     Patient updatePatient(Long id, Patient patient);
+
+    Patient addPrescriptionToPatient(Long patientId, Prescription prescription);
 
     void deletePatient(Long id);
 }
