@@ -2,6 +2,7 @@ package com.example.przychodnia.services;
 
 import com.example.przychodnia.models.Doctor;
 import com.example.przychodnia.repository.DoctorRepository;
+import com.example.przychodnia.services.interfaces.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

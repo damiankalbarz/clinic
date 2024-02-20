@@ -3,7 +3,7 @@ package com.example.przychodnia.controllers;
 import com.example.przychodnia.models.Clinic;
 import com.example.przychodnia.models.Doctor;
 import com.example.przychodnia.models.Patient;
-import com.example.przychodnia.services.ClinicService;
+import com.example.przychodnia.services.interfaces.ClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

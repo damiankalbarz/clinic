@@ -2,7 +2,7 @@ package com.example.przychodnia.controllers;
 
 import com.example.przychodnia.models.Patient;
 import com.example.przychodnia.models.Prescription;
-import com.example.przychodnia.services.PatientService;
+import com.example.przychodnia.services.interfaces.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

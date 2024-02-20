@@ -4,7 +4,7 @@ import com.example.przychodnia.models.Clinic;
 import com.example.przychodnia.models.Doctor;
 import com.example.przychodnia.models.Patient;
 import com.example.przychodnia.repository.ClinicRepository;
-import com.example.przychodnia.services.ClinicService;
+import com.example.przychodnia.services.interfaces.ClinicService;
 import com.example.przychodnia.repository.DoctorRepository;
 import com.example.przychodnia.repository.PatientRepository;
 

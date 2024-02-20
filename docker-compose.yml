@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  # Serwis dla aplikacji Spring Boot
+  spring-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+  # Serwis dla bazy danych MySQL
+  db:
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: clinic
+      MYSQL_USER: root
+      MYSQL_PASSWORD: password
+

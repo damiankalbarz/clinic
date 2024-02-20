@@ -2,6 +2,7 @@ package com.example.przychodnia.services;
 
 import com.example.przychodnia.models.Visit;
 import com.example.przychodnia.repository.VisitRepository;
+import com.example.przychodnia.services.interfaces.VisitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

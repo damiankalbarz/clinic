@@ -4,6 +4,7 @@ import com.example.przychodnia.models.Patient;
 
 import com.example.przychodnia.models.Prescription;
 import com.example.przychodnia.repository.PatientRepository;
+import com.example.przychodnia.services.interfaces.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

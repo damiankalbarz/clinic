@@ -1,7 +1,7 @@
 package com.example.przychodnia.controllers;
 
 import com.example.przychodnia.models.Prescription;
-import com.example.przychodnia.services.PrescriptionService;
+import com.example.przychodnia.services.interfaces.PrescriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

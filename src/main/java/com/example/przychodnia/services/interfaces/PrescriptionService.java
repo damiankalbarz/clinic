@@ -1,4 +1,4 @@
-package com.example.przychodnia.services;
+package com.example.przychodnia.services.interfaces;
 
 import com.example.przychodnia.models.Prescription;
 
