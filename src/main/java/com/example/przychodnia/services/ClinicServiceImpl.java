@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ClinicServiceImpl implements ClinicService {
@@ -123,6 +124,20 @@ public class ClinicServiceImpl implements ClinicService {
             clinic.setPatientList(patientList);
             clinicRepository.save(clinic);
             return patient;
+        }
+
+        return null;
+    }
+
+    @Override
+    public List<Doctor> getDoctorsBySpecialization(Long clinicId, String specialization) {
+        Clinic clinic = clinicRepository.findById(clinicId).orElse(null);
+        List<Doctor> doctorsInClinic = (clinic != null) ? clinic.getDoctorList() : null;
+
+        if (doctorsInClinic != null) {
+            return doctorsInClinic.stream()
+                    .filter(doctor -> doctor.getSpecialization().equalsIgnoreCase(specialization))
+                    .collect(Collectors.toList());
         }
 
         return null;

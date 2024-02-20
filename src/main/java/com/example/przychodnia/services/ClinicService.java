@@ -19,4 +19,6 @@ public interface ClinicService {
     List<Patient> getPatientsInClinic(Long clinicId);
     Doctor addDoctorToClinicById(Long clinicId, Long doctorId);
     Patient addPatientToClinicById(Long clinicId, Long patientId);
+    List<Doctor> getDoctorsBySpecialization(Long clinicId, String specialization);
+
 }

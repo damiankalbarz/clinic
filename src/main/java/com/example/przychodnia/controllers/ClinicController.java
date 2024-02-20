@@ -75,4 +75,9 @@ public class ClinicController {
         return clinicService.addPatientToClinicById(clinicId, patientId);
     }
 
+    @GetMapping("/{clinicId}/doctors/{specialization}")
+    public List<Doctor> getDoctorsBySpecialization(@PathVariable Long clinicId, @PathVariable String specialization) {
+        return clinicService.getDoctorsBySpecialization(clinicId, specialization);
+    }
+
 }
