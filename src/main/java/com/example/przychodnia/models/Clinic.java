@@ -18,5 +18,6 @@ public class Clinic {
     private List<Patient> patientList;
     @OneToMany
     private List<Doctor> doctorList;
-
+    @OneToMany
+    private List<Tests> testsList;
 }
