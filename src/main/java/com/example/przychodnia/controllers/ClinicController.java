@@ -3,8 +3,11 @@ package com.example.przychodnia.controllers;
 import com.example.przychodnia.models.Clinic;
 import com.example.przychodnia.models.Doctor;
 import com.example.przychodnia.models.Patient;
+import com.example.przychodnia.models.Tests;
 import com.example.przychodnia.services.interfaces.ClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -78,6 +81,17 @@ public class ClinicController {
     @GetMapping("/{clinicId}/doctors/{specialization}")
     public List<Doctor> getDoctorsBySpecialization(@PathVariable Long clinicId, @PathVariable String specialization) {
         return clinicService.getDoctorsBySpecialization(clinicId, specialization);
+    }
+
+    @PostMapping("/{clinicId}/addTest")
+    public ResponseEntity<Clinic> addTestToClinic(@PathVariable Long clinicId, @RequestBody Tests test) {
+        Clinic updatedClinic = clinicService.addTestToClinic(clinicId, test);
+
+        if (updatedClinic != null) {
+            return new ResponseEntity<>(updatedClinic, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
 }

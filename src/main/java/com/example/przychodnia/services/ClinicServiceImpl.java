@@ -3,6 +3,7 @@ package com.example.przychodnia.services;
 import com.example.przychodnia.models.Clinic;
 import com.example.przychodnia.models.Doctor;
 import com.example.przychodnia.models.Patient;
+import com.example.przychodnia.models.Tests;
 import com.example.przychodnia.repository.ClinicRepository;
 import com.example.przychodnia.services.interfaces.ClinicService;
 import com.example.przychodnia.repository.DoctorRepository;
@@ -141,5 +142,17 @@ public class ClinicServiceImpl implements ClinicService {
         }
 
         return null;
+    }
+
+    public Clinic addTestToClinic(Long clinicId, Tests test) {
+        Clinic clinic = clinicRepository.findById(clinicId).orElse(null);
+
+        if (clinic != null) {
+            clinic.addTest(test);
+            return clinicRepository.save(clinic);
+        } else {
+            // Obsługa przypadku, gdy klinika o podanym ID nie istnieje
+            return null;
+        }
     }
 }

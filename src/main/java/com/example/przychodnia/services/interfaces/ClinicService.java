@@ -3,6 +3,7 @@ package com.example.przychodnia.services.interfaces;
 import com.example.przychodnia.models.Clinic;
 import com.example.przychodnia.models.Doctor;
 import com.example.przychodnia.models.Patient;
+import com.example.przychodnia.models.Tests;
 
 import java.util.List;
 
@@ -20,5 +21,6 @@ public interface ClinicService {
     Doctor addDoctorToClinicById(Long clinicId, Long doctorId);
     Patient addPatientToClinicById(Long clinicId, Long patientId);
     List<Doctor> getDoctorsBySpecialization(Long clinicId, String specialization);
+    public Clinic addTestToClinic(Long clinicId, Tests test);
 
 }
