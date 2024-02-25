@@ -32,11 +32,14 @@ public class Patient {
     @NotBlank(message = "Numer telefonu nie może być pusty")
     @Pattern(regexp = "\\d{9}", message = "Numer telefonu powinien zawierać 9 cyfr")
     private String phone;
+
     @NotBlank(message = "Adres email nie może być pusty")
     @Email(message = "Nieprawidłowy format adresu email")
     private String email;
+
     @NotBlank(message = "Adres nie może być pusty")
     private String address;
+
     @OneToMany
     private List<Prescription> prescriptionList;
 

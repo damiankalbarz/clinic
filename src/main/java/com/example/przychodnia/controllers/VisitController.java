@@ -2,6 +2,7 @@ package com.example.przychodnia.controllers;
 
 import com.example.przychodnia.models.Visit;
 import com.example.przychodnia.services.interfaces.VisitService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +34,7 @@ public class VisitController {
     }
 
     @PostMapping
-    public ResponseEntity<Visit> addVisit(@RequestBody Visit visit) {
+    public ResponseEntity<Visit> addVisit(@Valid @RequestBody Visit visit) {
         Visit addedVisit = visitService.addVisit(visit);
         return new ResponseEntity<>(addedVisit, HttpStatus.CREATED);
     }

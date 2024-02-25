@@ -5,6 +5,7 @@ import com.example.przychodnia.models.Doctor;
 import com.example.przychodnia.models.Patient;
 import com.example.przychodnia.models.Tests;
 import com.example.przychodnia.services.interfaces.ClinicService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ public class ClinicController {
     }
 
     @PostMapping
-    public Clinic addClinic(@RequestBody Clinic clinic) {
+    public Clinic addClinic(@Valid @RequestBody Clinic clinic) {
         return clinicService.saveClinic(clinic);
     }
 

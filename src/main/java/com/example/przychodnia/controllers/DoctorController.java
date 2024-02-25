@@ -3,6 +3,7 @@ package com.example.przychodnia.controllers;
 import com.example.przychodnia.models.Doctor;
 
 import com.example.przychodnia.services.interfaces.DoctorService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +31,7 @@ public class DoctorController {
     }
 
     @PostMapping
-    public Doctor saveDoctor(@RequestBody Doctor doctor) {
+    public Doctor saveDoctor(@Valid @RequestBody Doctor doctor) {
         return doctorService.saveDoctor(doctor);
     }
 
