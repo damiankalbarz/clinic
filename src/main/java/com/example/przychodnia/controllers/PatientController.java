@@ -3,15 +3,18 @@ package com.example.przychodnia.controllers;
 import com.example.przychodnia.models.Patient;
 import com.example.przychodnia.models.Prescription;
 import com.example.przychodnia.services.interfaces.PatientService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/patients")
+@Validated
 public class PatientController {
 
     private final PatientService patientService;
@@ -34,7 +37,7 @@ public class PatientController {
     }
 
     @PostMapping
-    public ResponseEntity<Patient> addPatient(@RequestBody Patient patient) {
+    public ResponseEntity<Patient> addPatient(@Valid @RequestBody Patient patient) {
         Patient addedPatient = patientService.addPatient(patient);
         return new ResponseEntity<>(addedPatient, HttpStatus.CREATED);
     }
