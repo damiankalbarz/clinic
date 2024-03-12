@@ -6,12 +6,15 @@ import com.example.przychodnia.models.Prescription;
 import com.example.przychodnia.repository.PatientRepository;
 import com.example.przychodnia.services.interfaces.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class PatientServiceImpl implements PatientService {
+
+
 
     private final PatientRepository patientRepository;
 
@@ -24,6 +27,10 @@ public class PatientServiceImpl implements PatientService {
     public List<Patient> getAllPatients() {
         return patientRepository.findAll();
     }
+
+
+
+
 
     @Override
     public Patient getPatientById(Long id) {
