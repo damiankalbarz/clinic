@@ -1,10 +1,13 @@
 package com.example.przychodnia.services;
 
+import com.example.przychodnia.models.Doctor;
 import com.example.przychodnia.models.Patient;
 
 import com.example.przychodnia.models.Prescription;
 import com.example.przychodnia.repository.PatientRepository;
 import com.example.przychodnia.services.interfaces.PatientService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
@@ -15,6 +18,8 @@ import java.util.List;
 public class PatientServiceImpl implements PatientService {
 
 
+    @Autowired
+    private KafkaTemplate<String, String> kafkaTemplate;
 
     private final PatientRepository patientRepository;
 
@@ -28,6 +33,16 @@ public class PatientServiceImpl implements PatientService {
         return patientRepository.findAll();
     }
 
+    public void sendPatient(Patient patient) {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            String reqJson = mapper.writeValueAsString(patient);
+            kafkaTemplate.send("patient", reqJson);
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+    }
 
 
 

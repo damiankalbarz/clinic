@@ -18,5 +18,6 @@ public interface PatientService {
     Patient addPrescriptionToPatient(Long patientId, Prescription prescription);
 
     void deletePatient(Long id);
+     void sendPatient(Patient patient);
 
 }
