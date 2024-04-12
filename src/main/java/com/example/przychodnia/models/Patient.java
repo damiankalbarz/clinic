@@ -7,14 +7,17 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Data
 public class Patient {
     @Id
@@ -40,7 +43,25 @@ public class Patient {
     @NotBlank(message = "Adres nie może być pusty")
     private String address;
 
-    @OneToMany
-    private List<Prescription> prescriptionList;
+    @NotBlank(message = "PESEL nie może być pusty")
+    @Pattern(regexp = "\\d{11}", message = "PESEL powinien zawierać 11 cyfr")
+    private String pesel;
+
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<Prescription> prescriptionList = new ArrayList<>();;
+
+    public void addPrescription(Prescription prescription) {
+        prescriptionList.add(prescription);
+        prescription.setPatient(this);
+    }
+
+    @Override
+    public String toString() {
+        return "Patient{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                '}';
+    }
 
 }

@@ -1,8 +1,12 @@
 package com.example.przychodnia.services;
 
+import com.example.przychodnia.models.Patient;
 import com.example.przychodnia.models.Prescription;
+import com.example.przychodnia.repository.PatientRepository;
 import com.example.przychodnia.services.interfaces.PrescriptionService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import com.example.przychodnia.repository.PrescriptionRepository;
 
@@ -14,6 +18,10 @@ import java.util.Optional;
 public class PrescriptionServiceImpl implements PrescriptionService {
 
     private final PrescriptionRepository prescriptionRepository;
+
+
+
+
 
     @Autowired
     public PrescriptionServiceImpl(PrescriptionRepository prescriptionRepository) {
@@ -44,6 +52,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
             Prescription prescription = existingPrescription.get();
             prescription.setDescription(updatedPrescription.getDescription());
             prescription.setPatient(updatedPrescription.getPatient());
+            prescription.setDaysOfSickLeave(updatedPrescription.getDaysOfSickLeave());
             return prescriptionRepository.save(prescription);
         }
 

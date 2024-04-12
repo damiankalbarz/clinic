@@ -4,7 +4,9 @@ import com.example.przychodnia.models.Doctor;
 import com.example.przychodnia.models.Patient;
 
 import com.example.przychodnia.models.Prescription;
+import com.example.przychodnia.models.SickLeave;
 import com.example.przychodnia.repository.PatientRepository;
+import com.example.przychodnia.repository.PrescriptionRepository;
 import com.example.przychodnia.services.interfaces.PatientService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -21,12 +23,14 @@ public class PatientServiceImpl implements PatientService {
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
 
-    private final PatientRepository patientRepository;
+    @Autowired
+    private PatientRepository patientRepository;
 
     @Autowired
-    public PatientServiceImpl(PatientRepository patientRepository) {
-        this.patientRepository = patientRepository;
-    }
+    private PrescriptionRepository prescriptionRepository;
+
+
+
 
     @Override
     public List<Patient> getAllPatients() {
@@ -44,6 +48,16 @@ public class PatientServiceImpl implements PatientService {
         }
     }
 
+    public void sendSickLeave(SickLeave sickLeave) {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            String reqJson = mapper.writeValueAsString(sickLeave);
+            System.out.println(sickLeave);
+            kafkaTemplate.send("sickLeave", reqJson);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
 
@@ -75,9 +89,12 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public Patient addPrescriptionToPatient(Long patientId, Prescription prescription) {
         Patient patient = getPatientById(patientId);
-        List<Prescription> prescriptionList = patient.getPrescriptionList();
-        prescriptionList.add(prescription);
-        patient.setPrescriptionList(prescriptionList);
+        Prescription savedPrescription = prescriptionRepository.save(prescription);
+        patient.addPrescription(prescription);
+        SickLeave sickLeave = new SickLeave();
+        sickLeave.setDaysOfSickLeave(prescription.getDaysOfSickLeave());
+        sickLeave.setPesel((patient.getPesel()));
+        sendSickLeave(sickLeave);
         return patientRepository.save(patient);
     }
 }

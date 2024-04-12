@@ -15,4 +15,5 @@ public interface PrescriptionService {
     Prescription updatePrescription(Long id, Prescription prescription);
 
     void deletePrescription(Long id);
+
 }
